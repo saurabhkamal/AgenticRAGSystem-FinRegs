@@ -76,15 +76,27 @@ def retrieve(state: GraphState) -> GraphState:
 # - "retrieve": answers using the retrieved chunks, and attaches citations
 # - "direct": answers from general knowledge and conversation history, no citations
 
+LIST_FORMAT_RULE = (
+    "Whenever the answer includes multiple items, categories, principles, or steps, "
+    "you MUST format them as a markdown bullet list: each item on its own line, "
+    "starting with '- ', like this:\n"
+    "- **Item name** — description of the item.\n"
+    "- **Item name** — description of the item.\n"
+    "Never write list items as separate paragraphs without the leading '- '. "
+    "Plain prose is fine for answers that aren't lists."
+)
+
 GENERATE_WITH_CONTEXT_PROMPT = (
     "Answer the question using the provided context documents and the conversation so far. "
     "If the context doesn't contain the answer, say you don't have enough information. "
-    "Do not include citation markers yourself; citations are added separately."
+    "Do not include citation markers yourself; citations are added separately.\n\n"
+    + LIST_FORMAT_RULE
 )
 
 GENERATE_DIRECT_PROMPT = (
     "Answer the question directly, using the conversation so far for context. "
-    "This question does not need document lookup."
+    "This question does not need document lookup.\n\n"
+    + LIST_FORMAT_RULE
 )
 
 
