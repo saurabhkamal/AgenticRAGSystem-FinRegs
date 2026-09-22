@@ -1,0 +1,7 @@
+langgraph
+qdrant-client
+openai
+python-dotenv
+pdfplumber
+fastapi
+uvicorn[standard]
